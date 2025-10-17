@@ -1,49 +1,51 @@
-// Array to store pet objects
-const pets = [
-    {
-        name: "Cujo",
-        age: 5,
-        gender: "Male",
-        service: "Grooming",
-        breed: "Golden Retriever"
-    },
-    {
-        name: "Kimmi",
-        age: 2,
-        gender: "Female",
-        service: "Nail Trim",
-        breed: "Siamese"
-    },
-    {
-        name: "Mad Max",
-        age: 5,
-        gender: "Male",
-        service: "Bath & Brush",
-        breed: "German Shepherd"
-    }
-];
+// Object Literal for Salon Information
+const salon = {
+    name: "The Pet Salon",
+    address: "123 Pet Street Houston,Tx",
+    phone: "832-123-4567"
+};
 
-// Function to display the total number of registered pets
-function displayPetCount() {
-    const petCountElement = document.getElementById("petCount");
-    petCountElement.textContent = pets.length; // Update the count in the HTML
+// Pet Constructor
+function Pet(name, age, gender, breed, service, type) {
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+    this.breed = breed;
+    this.service = service;
+    this.type = type;
 }
 
-// Function to display the names of registered pets
-function displayPetNames() {
-    const petNamesList = document.getElementById("petNamesList");
-    petNamesList.innerHTML = ""; // Clear existing list items
-
-    // Iterate through the pets array and add each pet's name to the list
-    for (let i = 0; i < pets.length; i++) {
-        const listItem = document.createElement("li");
-        listItem.textContent = pets[i].name;
-        petNamesList.appendChild(listItem);
-    }
+if (document.getElementById('salon-info')) {
+    document.getElementById('salon-name').textContent = `Name: ${salon.name}`;
+    document.getElementById('salon-address').textContent = `Address: ${salon.address}`;
+    document.getElementById('salon-phone').textContent = `Phone: ${salon.phone}`;
 }
 
-// Call functions to display data when the page loads
-document.addEventListener("DOMContentLoaded", () => {
-    displayPetCount();
-    displayPetNames();
-});
+// Pet Registration Logic on registration.html
+if (document.getElementById('pet-registration-form')) {
+    const form = document.getElementById('pet-registration-form');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); 
+
+        const name = document.getElementById('petName').value;
+        const age = document.getElementById('petAge').value;
+        const gender = document.getElementById('petGender').value;
+        const breed = document.getElementById('petBreed').value;
+        const service = document.getElementById('petService').value;
+        const type = document.getElementById('petType').value;
+
+        const newPet = new Pet(name, age, gender, breed, service, type);
+        console.log("New pet registered:", newPet); 
+
+        
+        form.reset();
+    });
+
+    
+    const pet1 = new Pet("Buddy", 5, "male", "Golden Retriever", "Grooming", "dog");
+    const pet2 = new Pet("Whiskers", 2, "female", "Siamese", "Nail Trim", "cat");
+    const pet3 = new Pet("Squawk", 3, "other", "Parrot", "Wing Clip", "bird");
+
+    console.log("Initial Pets:", pet1, pet2, pet3); 
+}
