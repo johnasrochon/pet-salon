@@ -1,40 +1,31 @@
-tsParticles.load({
-  id: "pet-salon-particles",
-  options: {
-    particles: {
-      number: { value: 30 },
-      color: { value: "#e8d2c2" }, // A soft, warm beige
-      shape: {
-        type: "image",
-        image: {
-          src: "paw-print-icon.svg", // Use an SVG for crispness
-        },
-      },
-      size: {
-        value: 8,
-        random: true,
-      },
-      move: {
-        enable: true,
-        speed: 0.5,
-        direction: "bottom", // Particles float upwards
-        random: true,
-        straight: false,
-        out_mode: "out",
-      },
-      opacity: {
-        value: 0.5,
-        random: true,
-      },
-    },
-    interactivity: {
-      detectsOn: "canvas",
-      events: {
-        onhover: {
-          enable: true,
-          mode: "repulse", // Paw prints move away from the mouse
-        },
-      },
-    },
-  },
-});
+$("#servicesForm") .on("submit", function (event) {
+
+    event.preventDefault();
+
+    const serviceName = $("#serviceName") .val() .trim();
+    const serviceDescription = $("#serviceDescription") .val() .trim();
+    const servicePrice = $("#servicePrice") .val();
+
+console.log(`The Values Are: ${serviceName}, ${serviceDescription}, ${servicePrice}`);
+
+$("#serviceName, #serviceDescription, #servicePrice").removeClass("is-invalid");
+
+const priceValue = parseFloat(servicePrice);
+
+if(!serviceName || !serviceDescription || isNaN(priceValue) || priceValue <= 0){
+
+    if(!serviceName){ $("#serviceName") .addClass("is-invalid");}
+    if(!serviceDescription){ $("#serviceDescription") .addClass("is-invalid");}
+    if(isNaN(priceValue) || priceValue <= 0){ $("#servicePrice") .addClass("is-invalid");}
+
+    return;
+}else{
+    const newService = new Service(serviceName, serviceDescription, priceValue);
+    console.log("Service has been saved:", newService);
+}
+
+$("#servicesForm")[0].reset();
+
+$("#serviceName, #serviceDescription, #servicePrice").removeClass("is-invalid");
+
+}); 

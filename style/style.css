@@ -1,0 +1,18 @@
+:root{
+    --background: #f4f4fb;
+    --surface: #fdfdff;
+    --text: #1a2744;
+    --button: #008fff;
+}
+
+.dark-mode{
+   --background: #1a2744;
+    --surface: #23345a;
+    --text: #f4f4fb;
+    --button: #45adff; 
+}
+
+body{
+    background-color: var(--background);
+    color: var(--text);
+}
